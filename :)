@@ -1,5 +1,6 @@
 import os
 import ast
+import pygame
 import pandas as pd
 
 os.getcwd()
@@ -7,12 +8,13 @@ os.chdir('/Users/jael/Desktop/SCHOOL/cv1014/archive')
 
 metadata = pd.read_csv('movies_metadata.csv', low_memory=False)
 
+
 def menu():
     print("""
           1: VIEW TOP MOVIES 
           2: TOP MOVIES BY GENRE 
-          3: TOP MOVIES BY LANGUAGE
-          4: BASED ON OTHER MOVIES YOU'VE LIKED
+          3: PRODUCTION STUDIO
+          4: 
           5: EXIT""")
 
 def weighted_rating(x):
@@ -38,9 +40,9 @@ def conversion(data):
 def series(x):
     return pd.Series(x, dtype=object)
 
-shownMovies = metadata.copy().loc[metadata['vote_count'] >= metadata['vote_count'].quantile(0.85)]
+shownMovies = metadata.copy().loc[metadata['vote_count'] >= metadata['vote_count'].quantile(0.9)]
 shownMovies['wr'] = shownMovies.apply(weighted_rating, axis=1)
-shownMovies = shownMovies.sort_values('wr', ascending=False)
+shownMovies = shownMovies.sort_values('wr', ascending=False).head(100)
 
 shownMovies['genres'] = shownMovies['genres'].apply(ast.literal_eval)
 
@@ -92,18 +94,18 @@ while option:
         shownMovies = shownMovies.drop('original_language', axis=1).join(l)
         
         if lan == 1:
-            x = shownMovies[shownMovies.lang == 'en']
+            x = shownMovies[shownMovies.lang == 'en'].sort_values('wr', ascending=False)
             print(x['title'].head(num).to_string())
             buffer = input("Press enter to continue.")
             
         elif lan == 2:
-            x = shownMovies[shownMovies.lang == 'fr']
+            x = shownMovies[shownMovies.lang == 'fr'].sort_values('wr', ascending=False)
             print(x['title'].head(num).to_string())
             buffer = input("Press enter to continue.")
             
             
         elif lan == 3:
-            x = shownMovies[shownMovies.lang == 'zh']
+            x = shownMovies[shownMovies.lang == 'zh'].sort_values('wr', ascending=False)
             print(x['title'].head(num).to_string())
             buffer = input("Press enter to continue.")
             
@@ -122,6 +124,3 @@ while option:
     else: 
         print("We're unable to compute that request. Please try again :)")
  
-
-
-'C:/Users/nkoh9/OneDrive/Desktop/archive'
