@@ -1,0 +1,72 @@
+import pygame
+from pygame.locals import *
+from pygame import gfxdraw
+
+pygame.init()
+
+pygame.display.set_caption('Movie Recommendator')
+
+white = (250, 250, 250)
+
+screen = pygame.display.set_mode((800,600), 0, 32)
+
+title_font = pygame.font.SysFont("Arial", 30, bold=False, italic=False)
+title = title_font.render("Welcome to EN2_6's movie recommendation system!", True, white)
+title_rect = title.get_rect(center=(400,200))
+
+option = pygame.font.SysFont("Arial",18, bold=False, italic=False)
+option1 = option.render("VIEW TOP MOVIES", True, white)
+option1_rect = option1.get_rect(center=(400, 350))
+
+option2 = option.render("TOP MOVIES BY GENRE", True, white)
+option2_rect = option1.get_rect(center=(375, 400))
+
+option3 = option.render("PRODUCTION COMPANY", True, white)
+option3_rect = option1.get_rect(center=(373, 450))
+
+running = True
+
+def menu():
+    screen.fill((25, 25, 25))
+    mouse = pygame.mouse.get_pos()
+    
+    if 280 <= mouse[0] <= 520 and 330 <= mouse[1] <= 370:
+        pygame.draw.rect(screen,(25, 25, 25),[280,330,240,40], border_radius = 15)
+
+    else:
+        pygame.draw.rect(screen,(250, 154, 154),[280,330,240,40], border_radius = 15)
+        
+    if 280 <= mouse[0] <= 520 and 380 <= mouse[1] <= 420:
+        pygame.draw.rect(screen,(25, 25, 25),[280,380,240,40], border_radius = 15)
+    else:
+        pygame.draw.rect(screen,(250, 154, 154),[280,380,240,40], border_radius = 15)
+    
+    if 280 <= mouse[0] <= 520 and 430 <= mouse[1] <= 480:
+        pygame.draw.rect(screen,(25, 25, 25),[280,430,240,40], border_radius = 15)
+    else:
+        pygame.draw.rect(screen,(250, 154, 154),[280,430,240,40], border_radius = 15)
+        
+        
+    screen.blit(title,title_rect)
+    screen.blit(option1,option1_rect)
+    screen.blit(option2,option2_rect)
+    screen.blit(option3,option3_rect)
+    pygame.display.update()
+    
+    return
+
+while running: 
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            running = False
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button ==1:
+            print('i wna die')
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button ==1:
+            print('i wna boo')
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button ==1:
+            print('i wna kms')
+    
+    menu()
+    
+pygame.display.quit()
+pygame.quit()
