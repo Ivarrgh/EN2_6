@@ -82,31 +82,31 @@ while option:
         buffer = input("Press enter to continue.")
         continue
     
-    elif choice == 3:
-        print("Please choose the language you want to view!")
+   print("Please choose the studio you're most interested in!")
         menu2()
-        lan = int(input("Which language do you want to view? "))
+        stud = int(input("Which studio? "))
         num = int(input("How many movies do you want to see? "))
         
+        shownMovies['production_companies'] = shownMovies['production_companies'].apply(conversion)
         
-        l = shownMovies.original_language.apply(series).stack().reset_index(level=1, drop=True)
-        l.name = 'lang'
-        shownMovies = shownMovies.drop('original_language', axis=1).join(l)
+        studio = shownMovies.production_companies.apply(series).stack().reset_index(level=1, drop=True)
+        studio.name = 'studioS'
+        shownMovies = shownMovies.drop('production_companies', axis=1).join(studio)
         
-        if lan == 1:
-            x = shownMovies[shownMovies.lang == 'en'].sort_values('wr', ascending=False)
-            print(x['title'].head(num).to_string())
+        if stud == 1:
+            x = shownMovies[shownMovies.studioS == "Warner Bros."].sort_values('wr', ascending=False)
+            print(x['title'].head(num).to_string(index=False))
             buffer = input("Press enter to continue.")
             
-        elif lan == 2:
-            x = shownMovies[shownMovies.lang == 'fr'].sort_values('wr', ascending=False)
-            print(x['title'].head(num).to_string())
+        elif stud == 2:
+            x = shownMovies[shownMovies.studioS == 'Walt Disney Pictures'].sort_values('wr', ascending=False)
+            print(x['title'].head(num).to_string(index=False))
             buffer = input("Press enter to continue.")
             
             
-        elif lan == 3:
-            x = shownMovies[shownMovies.lang == 'zh'].sort_values('wr', ascending=False)
-            print(x['title'].head(num).to_string())
+        elif stud == 3:
+            x = shownMovies[shownMovies.studioS == 'Universal Pictures'].sort_values('wr', ascending=False)
+            print(x['title'].head(num).to_string(index=False))
             buffer = input("Press enter to continue.")
             
         else:
@@ -115,7 +115,21 @@ while option:
         continue
     
     elif choice == 4:
-        break    
+
+            year = input("Please enter a year (2017 or earlier): ")
+            num = int(input("How many movies do you want to see? "))
+
+            l = shownMovies.year.apply(
+                series).stack().reset_index(level=1, drop=True)
+            l.name = 'year'
+            shownMovies = shownMovies.drop('year', axis=1).join(l)
+            x = shownMovies[shownMovies.year == year]
+
+            print(f"Here are the top movies released in {year}")
+            print(x['title'].head(num).to_string())
+
+            buffer = input("Press enter to continue.")
+            continue
     
     elif choice == 5:
         option=False
