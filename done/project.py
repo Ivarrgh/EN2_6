@@ -624,10 +624,6 @@ while is_running:
                     results_up = pygame_gui.elements.UITextBox(up, relative_rect=pygame.Rect((280, 150), (260, 300)),
                                            manager=production_manager_2)
                     
-                elif event.ui_element == release_dates:
-                    current_screen = "RELEASE_DATE"
-                    
-                    
                 elif event.ui_element == back_main_1 or event.ui_element == back_main_2 or event.ui_element == back_main_3 or event.ui_element == back_main_4:
                     current_screen = "MAIN"
                 
