@@ -207,7 +207,6 @@ while is_running:
 
         if event.type == pygame.USEREVENT:
             if event.user_type == pygame_gui.UI_DROP_DOWN_MENU_CHANGED:
-                expand_button = 'hi'
                 if event.text == "2017":
                     current_screen = "RELEASE_DATE_2"
                     x = shownMovies_yr[shownMovies_yr.year == '2017']
