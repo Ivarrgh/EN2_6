@@ -647,3 +647,4 @@ while is_running:
     manager[current_screen].draw_ui(screen)
 
     pygame.display.update()
+pygame.quit()
