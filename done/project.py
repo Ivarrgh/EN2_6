@@ -200,6 +200,23 @@ is_running = True
 current_screen = "MAIN"
 
 while is_running:
+    Login = false
+# while not logged in, keep asking for password input
+while (notlogin):
+(  password = input("Please input password to edit: ")
+                    
+        if password == "password": 
+                login = True
+                print('x')
+                break
+                
+                
+        else: 
+            print("That was the wrong password. Please try again.")
+]            
+
+If (login):
+>do what when login
     time_delta = clock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
